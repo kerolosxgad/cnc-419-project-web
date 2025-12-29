@@ -1,0 +1,102 @@
+import apiClient, { handleAPIError } from "./api";
+import {
+  SearchIOCRequest,
+  SearchIOCResponse,
+  FetchIOCRequest,
+  FetchIOCResponse,
+  IngestReport,
+  FetchStatusResponse,
+  StatisticsResponse,
+} from "@/types";
+
+/**
+ * Search IOCs with filters
+ */
+export async function searchIOCs(params: SearchIOCRequest = {}): Promise<SearchIOCResponse> {
+  try {
+    const response = await apiClient.post<SearchIOCResponse>("/threat-intel/search", params);
+    return response.data;
+  } catch (error) {
+    throw new Error(handleAPIError(error));
+  }
+}
+
+/**
+ * Fetch specific IOC by ID or value
+ */
+export async function fetchIOC(params: FetchIOCRequest): Promise<FetchIOCResponse> {
+  try {
+    const response = await apiClient.post<FetchIOCResponse>("/threat-intel/fetch", params);
+    return response.data;
+  } catch (error) {
+    throw new Error(handleAPIError(error));
+  }
+}
+
+/**
+ * Correlate IOC with related indicators
+ */
+export async function correlateIOC(iocId: number, lookbackDays: number = 7): Promise<any> {
+  try {
+    const response = await apiClient.post("/threat-intel/correlate", {
+      iocId,
+      lookbackDays,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(handleAPIError(error));
+  }
+}
+
+/**
+ * Get report summary (admin only)
+ */
+export async function getReportSummary(timeRange: string = "7d"): Promise<IngestReport> {
+  try {
+    console.log("📊 Calling /threat-intel/report-summary...");
+    const response = await apiClient.post<IngestReport>("/threat-intel/report-summary", {
+      timeRange
+    });
+    console.log("📊 Report response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("📊 Report error:", error);
+    throw new Error(handleAPIError(error));
+  }
+}
+
+/**
+ * Get statistics
+ */
+export async function getStatistics(): Promise<StatisticsResponse> {
+  try {
+    const response = await apiClient.get<StatisticsResponse>("/threat-intel/statistics");
+    return response.data;
+  } catch (error) {
+    throw new Error(handleAPIError(error));
+  }
+}
+
+/**
+ * Trigger IOC ingestion (admin only)
+ */
+export async function triggerIngest(): Promise<IngestReport> {
+  try {
+    const response = await apiClient.post<IngestReport>("/admin/ingest");
+    return response.data;
+  } catch (error) {
+    throw new Error(handleAPIError(error));
+  }
+}
+
+/**
+ * Get feed status
+ */
+export async function getFeedStatus(): Promise<FetchStatusResponse> {
+  try {
+    const response = await apiClient.get<FetchStatusResponse>("/admin/fetch-status");
+    return response.data;
+  } catch (error) {
+    throw new Error(handleAPIError(error));
+  }
+}

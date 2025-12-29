@@ -2,5 +2,97 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, :root { height: 100%; }
-body { @apply bg-gray-50 text-gray-900; }
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-gray-100 font-sans antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-card rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-card-hover;
+  }
+}
+
+@layer components {
+  /* Card component */
+  .card {
+    @apply bg-card border border-border rounded-lg p-6 shadow-card transition-all duration-200;
+  }
+
+  .card:hover {
+    @apply border-border-glow shadow-glow-sm;
+  }
+
+  /* Button variants */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-accent-blue hover:bg-blue-600 text-white shadow-glow-sm hover:shadow-glow;
+  }
+
+  .btn-secondary {
+    @apply bg-card hover:bg-card-hover text-gray-100 border border-border;
+  }
+
+  .btn-danger {
+    @apply bg-severity-critical hover:bg-red-700 text-white;
+  }
+
+  /* Input fields */
+  .input {
+    @apply w-full bg-card border border-border rounded-lg px-4 py-2 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent-blue focus:border-transparent transition-all duration-200;
+  }
+
+  /* Badge component */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-critical {
+    @apply bg-severity-critical/20 text-severity-critical border border-severity-critical/50;
+  }
+
+  .badge-high {
+    @apply bg-severity-high/20 text-severity-high border border-severity-high/50;
+  }
+
+  .badge-medium {
+    @apply bg-severity-medium/20 text-severity-medium border border-severity-medium/50;
+  }
+
+  .badge-low {
+    @apply bg-severity-low/20 text-severity-low border border-severity-low/50;
+  }
+
+  .badge-info {
+    @apply bg-severity-info/20 text-severity-info border border-severity-info/50;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply bg-card-hover animate-pulse rounded;
+  }
+
+  /* Glow effect */
+  .glow {
+    @apply shadow-glow-sm hover:shadow-glow transition-shadow duration-300;
+  }
+}
