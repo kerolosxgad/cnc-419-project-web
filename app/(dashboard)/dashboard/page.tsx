@@ -114,21 +114,21 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Dashboard Overview</h1>
-          <p className="text-gray-400">Real-time threat intelligence monitoring</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Dashboard Overview</h1>
+          <p className="text-sm text-gray-400">Real-time threat intelligence monitoring</p>
         </div>
         
         {/* Time Range Selector */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
           <span className="text-sm text-gray-400">Time Range:</span>
-          <div className="flex gap-2">
+          <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
             {timeRangeOptions.map((option) => (
               <button
                 key={option.value}
                 onClick={() => setTimeRange(option.value as any)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
                   timeRange === option.value
                     ? "bg-accent-blue text-white"
                     : "bg-card text-gray-400 hover:text-white hover:bg-card-hover"

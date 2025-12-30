@@ -139,34 +139,34 @@ export default function ReportsPage() {
     <div className="space-y-6">
 
       {/* HEADER */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Threat Intelligence Reports</h1>
-          <p className="text-gray-400">Comprehensive threat analysis and statistics</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Threat Intelligence Reports</h1>
+          <p className="text-sm text-gray-400">Comprehensive threat analysis and statistics</p>
         </div>
-        <button onClick={handleExportReport} className="btn btn-primary flex items-center gap-2">
+        <button onClick={handleExportReport} className="btn btn-primary flex items-center justify-center gap-2 w-full sm:w-auto">
           <Download className="w-4 h-4" />
-          Export Full Report
+          <span className="text-sm sm:text-base">Export Full Report</span>
         </button>
       </div>
 
       {/* METADATA */}
       <div className="card">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
             <div className="p-3 bg-accent-blue/20 rounded-lg">
-              <FileText className="w-6 h-6 text-accent-blue" />
+              <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-accent-blue" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">Weekly Threat Report</h2>
-              <p className="text-sm text-gray-400">
+              <h2 className="text-lg sm:text-xl font-bold text-white">Weekly Threat Report</h2>
+              <p className="text-xs sm:text-sm text-gray-400">
                 Generated: {formatDate(metadata.generatedAt)}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-gray-400">
+          <div className="flex items-center gap-2 text-gray-400 text-xs sm:text-sm">
             <Calendar className="w-4 h-4" />
-            <span className="text-sm">
+            <span>
               {formatDate(metadata.startDate)} - {formatDate(metadata.endDate)}
             </span>
           </div>
@@ -175,7 +175,7 @@ export default function ReportsPage() {
 
       {/* SUMMARY */}
       <div className="card">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: "Total IOCs", value: summary.totalIOCs, icon: Database, extra: `+${formatNumber(summary.newInPeriod)} new` },
           { label: "High Risk", value: `${summary.highRiskPercentage}%`, icon: AlertTriangle, extra: "Critical + High" },
@@ -185,9 +185,9 @@ export default function ReportsPage() {
           <div key={item.label} className="p-4 bg-background-secondary rounded-lg">
             <div className="flex items-center gap-2 text-gray-400 mb-2">
               <item.icon className="w-4 h-4" />
-              <p className="text-sm">{item.label}</p>
+              <p className="text-xs sm:text-sm">{item.label}</p>
             </div>
-            <p className="text-3xl font-bold text-white">{typeof item.value === 'number' ? formatNumber(item.value) : item.value}</p>
+            <p className="text-2xl sm:text-3xl font-bold text-white">{typeof item.value === 'number' ? formatNumber(item.value) : item.value}</p>
             <p className="text-xs text-gray-500 mt-1">{item.extra}</p>
           </div>
         ))}
@@ -277,36 +277,36 @@ export default function ReportsPage() {
 
       {/* TOP THREATS */}
       <div className="card">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <h3 className="text-lg font-semibold text-white">Top Critical Threats</h3>
-          <button onClick={handleExportTopThreats} className="btn btn-secondary flex items-center gap-2 text-sm">
+          <button onClick={handleExportTopThreats} className="btn btn-secondary flex items-center justify-center gap-2 text-sm w-full sm:w-auto">
             <Download className="w-4 h-4" />
             Export CSV
           </button>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        <div className="overflow-x-auto -mx-6 px-6 sm:mx-0 sm:px-0">
+          <table className="w-full min-w-[640px]">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">Type</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">Value</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">Severity</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">Confidence</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">Source</th>
+                <th className="text-left py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">Type</th>
+                <th className="text-left py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">Value</th>
+                <th className="text-left py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">Severity</th>
+                <th className="text-left py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">Confidence</th>
+                <th className="text-left py-3 px-2 sm:px-4 text-xs sm:text-sm font-medium text-gray-400">Source</th>
               </tr>
             </thead>
             <tbody>
               {topThreats.slice(0, 10).map((t) => (
                 <tr key={t.id} className="border-b border-border hover:bg-card-hover transition-colors">
-                  <td className="py-3 px-4">
+                  <td className="py-3 px-2 sm:px-4">
                     <span className="text-xs text-gray-500">{getIOCTypeLabel(t.type)}</span>
                   </td>
-                  <td className="py-3 px-4">
-                    <p className="text-sm font-mono text-white truncate max-w-xs">{t.value}</p>
+                  <td className="py-3 px-2 sm:px-4">
+                    <p className="text-xs sm:text-sm font-mono text-white truncate max-w-[150px] sm:max-w-xs">{t.value}</p>
                   </td>
-                  <td className="py-3 px-4">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                  <td className="py-3 px-2 sm:px-4">
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                       t.severity === "critical"
                         ? "bg-severity-critical/20 text-severity-critical border border-severity-critical/50"
                         : t.severity === "high"
@@ -318,11 +318,11 @@ export default function ReportsPage() {
                       {t.severity.charAt(0).toUpperCase() + t.severity.slice(1)}
                     </span>
                   </td>
-                  <td className="py-3 px-4">
-                    <span className="text-sm text-gray-400">{t.confidence}%</span>
+                  <td className="py-3 px-2 sm:px-4">
+                    <span className="text-xs sm:text-sm text-gray-400">{t.confidence}%</span>
                   </td>
-                  <td className="py-3 px-4">
-                    <span className="text-sm text-gray-400">{t.source}</span>
+                  <td className="py-3 px-2 sm:px-4">
+                    <span className="text-xs sm:text-sm text-gray-400 truncate max-w-[100px] inline-block">{t.source}</span>
                   </td>
                 </tr>
               ))}

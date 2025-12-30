@@ -53,7 +53,8 @@ export function Sidebar() {
       <aside
         className={cn(
           "fixed top-0 left-0 h-screen bg-card border-r border-border z-50 transition-all duration-300",
-          collapsed ? "w-20" : "w-64"
+          "lg:translate-x-0",
+          collapsed ? "-translate-x-full lg:translate-x-0 lg:w-20" : "translate-x-0 w-64"
         )}
       >
         {/* Header */}
