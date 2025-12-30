@@ -230,7 +230,7 @@ export default function DashboardPage() {
               </Link>
             ))}
           </div>
-          <Link href="/iocs" className="btn btn-secondary w-full mt-4">
+          <Link href="/iocs" className="btn btn-secondary w-full mt-4 flex items-center justify-center">
             View All IOCs
           </Link>
         </div>

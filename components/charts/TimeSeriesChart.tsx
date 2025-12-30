@@ -24,7 +24,10 @@ export function TimeSeriesChart({ data }: TimeSeriesChartProps) {
             backgroundColor: "#12172A",
             border: "1px solid #1E2847",
             borderRadius: "8px",
+            color: "#F1F5F9",
           }}
+          labelStyle={{ color: "#F1F5F9" }}
+          itemStyle={{ color: "#F1F5F9" }}
         />
         <Legend />
         <Line type="monotone" dataKey="count" stroke="#3B82F6" strokeWidth={2} dot={{ fill: "#3B82F6" }} />

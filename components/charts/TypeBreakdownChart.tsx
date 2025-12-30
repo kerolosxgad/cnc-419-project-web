@@ -18,7 +18,10 @@ export function TypeBreakdownChart({ data }: TypeBreakdownChartProps) {
             backgroundColor: "#12172A",
             border: "1px solid #1E2847",
             borderRadius: "8px",
+            color: "#F1F5F9",
           }}
+          labelStyle={{ color: "#F1F5F9" }}
+          itemStyle={{ color: "#F1F5F9" }}
         />
         <Bar dataKey="value" fill="#3B82F6" radius={[4, 4, 0, 0]} />
       </BarChart>
