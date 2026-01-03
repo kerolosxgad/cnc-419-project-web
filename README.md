@@ -1,4 +1,4 @@
-# 🛡️ Threat Intelligence Platform - SOC Dashboard
+# 🛡️ DeltaTI - Threat Intelligence Platform
 
 A modern, enterprise-grade Security Operations Center (SOC) dashboard built with **Next.js 16**, designed for real-time threat intelligence monitoring and analysis.
 
